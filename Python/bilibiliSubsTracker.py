@@ -6,9 +6,10 @@ from datetime import datetime
 elapsed = -5
 pfhelp = 0
 defaultuid = 14444480
-goal = 200000
 
 uid = int(input("请输入uid,0为默认（白羽千夏）\n输入完成后按回车\n"))
+goal = int(input("请输入目标粉丝数(单位：个)\n"))
+
 
 if(uid == 0):
 	uid = defaultuid
