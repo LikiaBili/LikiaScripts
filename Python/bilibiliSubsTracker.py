@@ -8,13 +8,14 @@ pfhelp = 0
 defaultuid = 14444480
 
 uid = int(input("请输入uid,0为默认（白羽千夏）\n输入完成后按回车\n"))
-goal = int(input("请输入目标粉丝数(单位：个)\n"))
-
+goal = int(input("请输入目标粉丝数，单位：个\n"))
 
 if(uid == 0):
 	uid = defaultuid
 
-url = request.urlopen('https://api.bilibili.com/x/relation/stat?vmid='+str(uid))
+headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'}
+req = request.Request(url='https://api.bilibili.com/x/relation/stat?vmid='+str(uid),headers=headers)
+url = request.urlopen(req)
 Data = json.loads(str(url.read().decode('utf-8')))
 deffollow = Data['data']['follower']
 Follows	= deffollow	
@@ -24,7 +25,8 @@ cleartotal = 0
 
 while('true'):
 	pfhelp = Follows
-	url = request.urlopen('https://api.bilibili.com/x/relation/stat?vmid='+str(uid))
+	req = request.Request(url='https://api.bilibili.com/x/relation/stat?vmid='+str(uid),headers=headers)
+	url = request.urlopen(req)
 	Data = json.loads(str(url.read().decode('utf-8')))
 	Follows = Data['data']['follower']
 
