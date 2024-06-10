@@ -139,7 +139,7 @@ def oncejob(from_id):
         sendEnd(groupid)
 
 def timejob(from_id):
-    global maxTimestamp,remainingMessage,runTime
+    global maxTimestamp,remainingMessage,runTime,groupid
     remainingMessage = ""
     newest = getDynamicLinkResponce(link,0)
     if(newest == -1): #如果返回值异常则跳过判断
@@ -152,7 +152,7 @@ def timejob(from_id):
         send(newest['desc']['user_profile']['info']['uname']+"发布动态更新！")
         print(newest['desc']['user_profile']['info']['uname']+"发布动态更新！")
         Reslove(newest)
-        sendEnd(from_id)
+        sendEnd(groupid)
         maxTimestamp = newest['desc']['timestamp']
     runTime = runTime + 5
     if runTime%21600 == 0:
@@ -211,8 +211,7 @@ else:
     maxTimestamp = getDynamicLinkResponce(link,0)['desc']['timestamp']
     bot = cqapi.create_bot(
         group_id_list=[
-        962918748, # 替换为你的QQ群号
-        455527686
+            groupid
         ],
     )
 
